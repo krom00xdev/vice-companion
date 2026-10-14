@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.kromdev.vicecity",
+    "sha256_cert_fingerprints": [
+      A2:1A:6E:02:6E:87:22:17:1C:D8:41:CD:92:A6:3D:70:DC:5D:53:73:CB:B5:DA:09:66:0C:B0:88:DE:29:DF:A4
+    ]
+  }
+}]
