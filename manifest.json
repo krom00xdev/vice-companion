@@ -1,0 +1,12 @@
+{
+  "background_color": "#0f0f1b",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Companion Guide for Vice City",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Vice City Guide",
+  "start_url": "unrivaled-kheer-72b6be.netlify.app",
+  "theme_color": "#0f0f1b",
+  "lang": "en"
+}

@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="manifest" href="data:application/manifest+json,{
+  %22name%22:%22Companion%20Guide%20for%20Vice%20City%22,
+  %22short_name%22:%22ViceCityGuide%22,
+  %22start_url%22:%22.%22,
+  %22display%22:%22standalone%22,
+  %22background_color%22:%22%230f0f1b%22,
+  %22theme_color%22:%22%230f0f1b%22,
+  %22icons%22:[{
+    %22src%22:%22data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%230f0f1b'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='200' fill='%2300f3ff'>VC</text></svg>%22,
+    %22sizes%22:%22512x512%22,
+    %22type%22:%22image/svg+xml%22
+  }]
+}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companion Guide for Vice City - Cheats, Walkthroughs & Secrets</title>
+  
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vice: {
+              bg: '#0f0f1b',
+              card: '#18182b',
+              border: '#2a2a48',
+              pink: '#ff007f',
+              cyan: '#00f0ff',
+              purple: '#9d00ff',
+              yellow: '#ffdc00'
+            }
+          },
+          fontFamily: {
+            title: ['Orbitron', 'sans-serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <style>
+    body {
+      background-color: #0f0f1b;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+    
+    .font-title {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* Glow Effects */
+    .glow-pink {
+      text-shadow: 0 0 10px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.3);
+    }
+    .glow-cyan {
+      text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+    .box-glow-pink {
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.25);
+    }
+    .box-glow-cyan {
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+    }
+    .border-glow-cyan {
+      border-color: #00f0ff;
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f0f1b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a2a48;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff007f;
+    }
+
+    /* Key Badge Styling */
+    .key-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: monospace;
+      color: #00f0ff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+      margin: 2px;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen pb-24 selection:bg-vice-pink selection:text-white">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-vice-bg/95 backdrop-blur border-b border-vice-border shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('dashboard')">
+          <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-vice-pink to-vice-cyan flex items-center justify-center text-white text-xl font-bold shadow-lg">
+            <i class="fa-solid fa-gamepad"></i>
+          </div>
+          <div>
+            <h1 class="font-title text-lg sm:text-xl font-black italic tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-vice-pink via-purple-400 to-vice-cyan">
+              VICE CITY
+            </h1>
+            <p class="text-[10px] text-gray-400 uppercase tracking-widest -mt-1">Companion Guide</p>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex space-x-1 lg:space-x-2">
+          <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
+            <i class="fa-solid fa-house text-vice-pink"></i> Home
+          </button>
+          <button onclick="switchTab('cheats')" id="nav-cheats" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
+            <i class="fa-solid fa-key text-vice-cyan"></i> Cheats
+          </button>
+          <button onclick="switchTab('walkthroughs')" id="nav-walkthroughs" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-vice-yellow"></i> Walkthroughs
+          </button>
+          <button onclick="switchTab('secrets')" id="nav-secrets" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2">
+            <i class="fa-solid fa-user-ninja text-vice-purple"></i> Secrets & Tips
+          </button>
+          <button onclick="switchTab('bookmarks')" id="nav-bookmarks" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 relative">
+            <i class="fa-solid fa-bookmark text-vice-pink"></i> Saved
+            <span id="bookmark-count-badge" class="bg-vice-pink text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">0</span>
+          </button>
+        </nav>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-vice-card">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-vice-border bg-vice-card/95 px-4 pt-2 pb-4 space-y-1">
+      <button onclick="switchTab('dashboard'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-3 hover:bg-vice-bg">
+        <i class="fa-solid fa-house text-vice-pink w-5"></i> Home
+      </button>
+      <button onclick="switchTab('cheats'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-3 hover:bg-vice-bg">
+        <i class="fa-solid fa-key text-vice-cyan w-5"></i> Cheat Codes
+      </button>
+      <button onclick="switchTab('walkthroughs'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-3 hover:bg-vice-bg">
+        <i class="fa-solid fa-map-location-dot text-vice-yellow w-5"></i> Walkthroughs
+      </button>
+      <button onclick="switchTab('secrets'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-3 hover:bg-vice-bg">
+        <i class="fa-solid fa-user-ninja text-vice-purple w-5"></i> Secrets & Tips
+      </button>
+      <button onclick="switchTab('bookmarks'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold flex items-center gap-3 hover:bg-vice-bg">
+        <i class="fa-solid fa-bookmark text-vice-pink w-5"></i> Bookmarks
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Search Container -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2 w-full">
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-vice-cyan">
+        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+      </div>
+      <input 
+        type="text" 
+        id="global-search" 
+        oninput="handleGlobalSearch()" 
+        placeholder="Search cheats, missions, weapons, secrets, or vehicles..." 
+        class="w-full pl-11 pr-10 py-3.5 bg-vice-card border border-vice-border rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-vice-cyan transition-all shadow-inner text-sm sm:text-base"
+      >
+      <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white">
+        <i class="fa-solid fa-circle-xmark text-lg"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full">
+
+    <!-- 1. DASHBOARD VIEW -->
+    <div id="view-dashboard" class="tab-view space-y-8">
+      
+      <!-- Hero Banner -->
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-vice-card via-purple-950/40 to-vice-card border border-vice-border p-6 sm:p-10 box-glow-pink">
+        <div class="relative z-10 max-w-2xl space-y-4">
+          <span class="px-3 py-1 rounded-full bg-vice-pink/20 text-vice-pink border border-vice-pink/40 text-xs font-bold tracking-wider uppercase">
+            Unofficial Player Hub
+          </span>
+          <h2 class="font-title text-2xl sm:text-4xl font-black text-white italic tracking-wide">
+            WELCOME TO <span class="text-vice-cyan glow-cyan">LEONIDA & VICE CITY</span>
+          </h2>
+          <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+            Your instant, offline-ready database for button combinations, 100% gold medal walkthroughs, hidden package locations, and money glitches.
+          </p>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button onclick="switchTab('cheats')" class="px-5 py-2.5 rounded-lg bg-vice-pink hover:bg-pink-600 text-white font-semibold text-sm transition-all shadow-lg shadow-vice-pink/30 flex items-center gap-2">
+              <i class="fa-solid fa-key"></i> Browse Cheats
+            </button>
+            <button onclick="switchTab('walkthroughs')" class="px-5 py-2.5 rounded-lg bg-vice-card hover:bg-vice-border border border-vice-cyan text-vice-cyan font-semibold text-sm transition-all flex items-center gap-2">
+              <i class="fa-solid fa-list-check"></i> View Missions
+            </button>
+          </div>
+        </div>
+        <div class="absolute -right-10 -bottom-10 opacity-20 pointer-events-none text-vice-pink">
+          <i class="fa-solid fa-city text-[220px]"></i>
+        </div>
+      </div>
+
+      <!-- Quick Category Navigation Cards -->
+      <div>
+        <h3 class="font-title text-base sm:text-lg text-white font-bold mb-4 flex items-center gap-2">
+          <i class="fa-solid fa-compass text-vice-cyan"></i> QUICK NAVIGATION
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          
+          <div onclick="switchTab('cheats')" class="bg-vice-card border border-vice-border hover:border-vice-pink rounded-xl p-5 cursor-pointer transition-all hover:-translate-y-1 group">
+            <div class="w-12 h-12 rounded-lg bg-vice-pink/10 text-vice-pink flex items-center justify-center text-2xl mb-3 group-hover:bg-vice-pink group-hover:text-white transition-colors">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h4 class="font-title text-white font-bold text-sm sm:text-base group-hover:text-vice-pink transition-colors">Cheat Codes</h4>
+            <p class="text-xs text-gray-400 mt-1">PS5, Xbox & PC button sequences.</p>
+          </div>
+
+          <div onclick="switchTab('walkthroughs')" class="bg-vice-card border border-vice-border hover:border-vice-yellow rounded-xl p-5 cursor-pointer transition-all hover:-translate-y-1 group">
+            <div class="w-12 h-12 rounded-lg bg-vice-yellow/10 text-vice-yellow flex items-center justify-center text-2xl mb-3 group-hover:bg-vice-yellow group-hover:text-black transition-colors">
+              <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h4 class="font-title text-white font-bold text-sm sm:text-base group-hover:text-vice-yellow transition-colors">Walkthroughs</h4>
+            <p class="text-xs text-gray-400 mt-1">Step-by-step guides & 100% medals.</p>
+          </div>
+
+          <div onclick="switchTab('secrets')" class="bg-vice-card border border-vice-border hover:border-vice-purple rounded-xl p-5 cursor-pointer transition-all hover:-translate-y-1 group">
+            <div class="w-12 h-12 rounded-lg bg-vice-purple/10 text-vice-purple flex items-center justify-center text-2xl mb-3 group-hover:bg-vice-purple group-hover:text-white transition-colors">
+              <i class="fa-solid fa-mask"></i>
+            </div>
+            <h4 class="font-title text-white font-bold text-sm sm:text-base group-hover:text-vice-purple transition-colors">Secrets & Tips</h4>
+            <p class="text-xs text-gray-400 mt-1">ATM tricks, fast cash, and easter eggs.</p>
+          </div>
+
+          <div onclick="switchTab('bookmarks')" class="bg-vice-card border border-vice-border hover:border-vice-cyan rounded-xl p-5 cursor-pointer transition-all hover:-translate-y-1 group">
+            <div class="w-12 h-12 rounded-lg bg-vice-cyan/10 text-vice-cyan flex items-center justify-center text-2xl mb-3 group-hover:bg-vice-cyan group-hover:text-black transition-colors">
+              <i class="fa-solid fa-bookmark"></i>
+            </div>
+            <h4 class="font-title text-white font-bold text-sm sm:text-base group-hover:text-vice-cyan transition-colors">Saved Bookmarks</h4>
+            <p class="text-xs text-gray-400 mt-1">Quick access to your saved items.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Featured Cheats Preview -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-title text-base sm:text-lg text-white font-bold flex items-center gap-2">
+            <i class="fa-solid fa-fire text-vice-pink"></i> POPULAR CHEATS
+          </h3>
+          <button onclick="switchTab('cheats')" class="text-xs text-vice-cyan hover:underline font-semibold flex items-center gap-1">
+            View All <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+        <div id="dashboard-popular-cheats" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 2. CHEAT CODES VIEW -->
+    <div id="view-cheats" class="tab-view hidden space-y-6">
+      
+      <!-- Controls Header: Category & Platform Toggle -->
+      <div class="bg-vice-card border border-vice-border rounded-xl p-4 sm:p-5 flex flex-col md:flex-row gap-4 items-center justify-between shadow-md">
+        
+        <!-- Categories Filter Buttons -->
+        <div class="flex flex-wrap gap-2 w-full md:w-auto" id="cheat-categories-container">
+          <!-- Dynamic category pills -->
+        </div>
+
+        <!-- Platform Switcher -->
+        <div class="flex items-center bg-vice-bg p-1 rounded-lg border border-vice-border w-full md:w-auto justify-center">
+          <span class="text-xs font-bold text-gray-400 px-3 uppercase tracking-wider hidden sm:inline">Platform:</span>
+          <button onclick="setPlatform('ps5')" id="platform-ps5" class="platform-btn px-3 py-1.5 rounded-md text-xs font-bold transition-all flex items-center gap-1.5">
+            <i class="fa-brands fa-playstation text-blue-400"></i> PS5
+          </button>
+          <button onclick="setPlatform('xbox')" id="platform-xbox" class="platform-btn px-3 py-1.5 rounded-md text-xs font-bold transition-all flex items-center gap-1.5">
+            <i class="fa-brands fa-xbox text-green-400"></i> Xbox
+          </button>
+          <button onclick="setPlatform('pc')" id="platform-pc" class="platform-btn px-3 py-1.5 rounded-md text-xs font-bold transition-all flex items-center gap-1.5">
+            <i class="fa-solid fa-desktop text-vice-pink"></i> PC
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Cheats List Grid -->
+      <div id="cheats-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- 3. WALKTHROUGHS VIEW -->
+    <div id="view-walkthroughs" class="tab-view hidden space-y-6">
+      
+      <div class="bg-vice-card border border-vice-border rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="font-title text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-vice-yellow"></i> MAIN STORY & SIDE MISSIONS
+          </h2>
+          <p class="text-xs text-gray-400 mt-1">Check off mission steps in real-time as you play.</p>
+        </div>
+        <div class="text-xs text-vice-cyan bg-vice-cyan/10 border border-vice-cyan/30 px-3 py-1.5 rounded-lg font-semibold flex items-center gap-2">
+          <i class="fa-solid fa-circle-check"></i>
+          <span id="completed-missions-count">0 / 0 Completed</span>
+        </div>
+      </div>
+
+      <!-- Walkthrough Chapters Accordion -->
+      <div id="walkthroughs-accordion" class="space-y-4">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- 4. SECRETS & TIPS VIEW -->
+    <div id="view-secrets" class="tab-view hidden space-y-6">
+      
+      <!-- Secret Categories Filter -->
+      <div class="flex flex-wrap gap-2" id="secrets-categories-container">
+        <!-- Dynamic Pills -->
+      </div>
+
+      <!-- Secrets Grid -->
+      <div id="secrets-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- 5. BOOKMARKS VIEW -->
+    <div id="view-bookmarks" class="tab-view hidden space-y-6">
+      
+      <div class="flex items-center justify-between bg-vice-card border border-vice-border p-4 rounded-xl">
+        <div>
+          <h2 class="font-title text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-bookmark text-vice-pink"></i> SAVED BOOKMARKS
+          </h2>
+          <p class="text-xs text-gray-400 mt-1">Items saved directly on your device storage.</p>
+        </div>
+        <button onclick="clearAllBookmarks()" class="text-xs bg-red-500/20 hover:bg-red-500/40 text-red-300 border border-red-500/40 px-3 py-2 rounded-lg font-semibold transition-all">
+          <i class="fa-solid fa-trash-can mr-1"></i> Clear All
+        </button>
+      </div>
+
+      <div id="bookmarks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+
+    <!-- SEARCH RESULTS OVERLAY VIEW (Shown when searching) -->
+    <div id="view-search-results" class="tab-view hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="font-title text-lg font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-magnifying-glass text-vice-cyan"></i> SEARCH RESULTS
+        </h2>
+        <span id="search-results-count" class="text-xs font-semibold text-gray-400 bg-vice-card px-3 py-1 rounded-full border border-vice-border">
+          0 found
+        </span>
+      </div>
+      <div id="search-results-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 bg-vice-card border border-vice-cyan text-white px-5 py-2.5 rounded-xl shadow-2xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all duration-300 opacity-0 pointer-events-none transform translate-y-4">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-vice-cyan"></i>
+    <span id="toast-msg">Action performed</span>
+  </div>
+
+  <!-- AdMob Banner Placeholder (Monetization Space) -->
+  <div class="fixed bottom-0 left-0 right-0 z-40 bg-vice-card/95 border-t border-vice-border py-2 px-4 flex items-center justify-center">
+    <div class="w-full max-w-4xl h-11 bg-vice-bg border border-dashed border-gray-700 rounded flex items-center justify-between px-4 text-xs text-gray-400">
+      <span class="flex items-center gap-2 text-gray-300 font-medium">
+        <i class="fa-solid fa-rectangle-ad text-vice-pink text-sm"></i>
+        <span>Ad Space Placeholder (320x50 / 728x90 Banner)</span>
+      </span>
+      <button onclick="this.parentElement.parentElement.remove()" class="text-gray-500 hover:text-gray-300">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Disclaimer Footer -->
+  <footer class="bg-vice-card/50 border-t border-vice-border py-6 mt-12 mb-10">
+    <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+      <p class="text-xs text-gray-400 max-w-3xl mx-auto leading-relaxed">
+        <strong class="text-gray-300">DISCLAIMER:</strong> This app is an unofficial fan companion guide for the Grand Theft Auto series. It is designed purely for reference, tips, and educational purposes. This application is not affiliated with, endorsed by, or sponsored by Rockstar Games, Take-Two Interactive, or any associated trademark holders.
+      </p>
+      <p class="text-[11px] text-gray-500 font-mono pt-1">
+        Vice City Companion App • Local Storage Saved • Version 1.0.4
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ==========================================
+    // DATASETS (Cheats, Walkthroughs & Secrets)
+    // ==========================================
+    const DATA = {
+      cheats: [
+        {
+          id: "cheat_01",
+          title: "Max Health & Armor",
+          category: "Player Status",
+          description: "Fills your health and body armor meters to 100% capacity.",
+          popular: true,
+          ps5: ["CIRCLE", "L1", "TRIANGLE", "R2", "X", "SQUARE", "CIRCLE", "RIGHT", "SQUARE", "L1", "L1", "L1"],
+          xbox: ["B", "LB", "Y", "RT", "A", "X", "B", "RIGHT", "X", "LB", "LB", "LB"],
+          pc: "TURTLE"
+        },
+        {
+          id: "cheat_02",
+          title: "Invincibility (5 Mins)",
+          category: "Player Status",
+          description: "Prevents all bullet, explosion, and fall damage for 300 seconds.",
+          popular: true,
+          ps5: ["RIGHT", "X", "RIGHT", "LEFT", "RIGHT", "R1", "RIGHT", "LEFT", "X", "TRIANGLE"],
+          xbox: ["RIGHT", "A", "RIGHT", "LEFT", "RIGHT", "RB", "RIGHT", "LEFT", "A", "Y"],
+          pc: "PAINKILLER"
+        },
+        {
+          id: "cheat_03",
+          title: "Give All Weapons",
+          category: "Weapons",
+          description: "Grants Pistol, Assault Rifle, Shotgun, Sniper Rifle, and Grenades.",
+          popular: true,
+          ps5: ["TRIANGLE", "R2", "LEFT", "L1", "X", "RIGHT", "TRIANGLE", "DOWN", "SQUARE", "L1", "L1", "L1"],
+          xbox: ["Y", "RT", "LEFT", "LB", "A", "RIGHT", "Y", "DOWN", "X", "LB", "LB", "LB"],
+          pc: "TOOLUP"
+        },
+        {
+          id: "cheat_04",
+          title: "Lower Wanted Level",
+          category: "World",
+          description: "Removes 1 star from your active police wanted level.",
+          popular: true,
+          ps5: ["R1", "R1", "CIRCLE", "R2", "RIGHT", "LEFT", "RIGHT", "LEFT", "RIGHT", "LEFT"],
+          xbox: ["RB", "RB", "B", "RT", "RIGHT", "LEFT", "RIGHT", "LEFT", "RIGHT", "LEFT"],
+          pc: "LAWYERUP"
+        },
+        {
+          id: "cheat_05",
+          title: "Raise Wanted Level",
+          category: "World",
+          description: "Adds 1 star to your active police wanted level.",
+          popular: false,
+          ps5: ["R1", "R1", "CIRCLE", "R2", "LEFT", "RIGHT", "LEFT", "RIGHT", "LEFT", "RIGHT"],
+          xbox: ["RB", "RB", "B", "RT", "LEFT", "RIGHT", "LEFT", "RIGHT", "LEFT", "RIGHT"],
+          pc: "FUGITIVE"
+        },
+        {
+          id: "cheat_06",
+          title: "Spawn Comet Sports Car",
+          category: "Vehicles",
+          description: "Spawns a fast two-door sports car immediately in front of player.",
+          popular: true,
+          ps5: ["R2", "L1", "CIRCLE", "RIGHT", "L1", "R1", "RIGHT", "LEFT", "CIRCLE", "R2"],
+          xbox: ["RT", "LB", "B", "RIGHT", "LB", "RB", "RIGHT", "LEFT", "B", "RT"],
+          pc: "COMET"
+        },
+        {
+          id: "cheat_07",
+          title: "Spawn Buzzard Chopper",
+          category: "Vehicles",
+          description: "Spawns an armed attack helicopter equipped with missiles.",
+          popular: true,
+          ps5: ["CIRCLE", "CIRCLE", "L1", "CIRCLE", "CIRCLE", "CIRCLE", "L1", "L2", "R1", "TRIANGLE", "CIRCLE", "TRIANGLE"],
+          xbox: ["B", "B", "LB", "B", "B", "B", "LB", "LT", "RB", "Y", "B", "Y"],
+          pc: "BUZZOFF"
+        },
+        {
+          id: "cheat_08",
+          title: "Super Jump",
+          category: "Player Status",
+          description: "Allows player to jump unusually high into the air.",
+          popular: false,
+          ps5: ["LEFT", "LEFT", "TRIANGLE", "TRIANGLE", "RIGHT", "RIGHT", "LEFT", "RIGHT", "SQUARE", "R1", "R2"],
+          xbox: ["LEFT", "LEFT", "Y", "Y", "RIGHT", "RIGHT", "LEFT", "RIGHT", "X", "RB", "RT"],
+          pc: "HOPTOIT"
+        },
+        {
+          id: "cheat_09",
+          title: "Change Weather (Sunny/Rain)",
+          category: "World",
+          description: "Cycles weather conditions between Clear, Foggy, Rain, and Thunder.",
+          popular: false,
+          ps5: ["R2", "X", "L1", "L1", "L2", "L2", "L2", "SQUARE"],
+          xbox: ["RT", "A", "LB", "LB", "LT", "LT", "LT", "X"],
+          pc: "MAKEITRAIN"
+        }
+      ],
+
+      walkthroughs: [
+        {
+          id: "chapter_1",
+          chapterTitle: "Act 1: Vice City Beginnings",
+          missions: [
+            {
+              id: "m_01",
+              title: "Mission 1: Welcome to Leonida",
+              protagonist: "Lucia & Jason",
+              difficulty: "Easy",
+              reward: "$2,500",
+              objectives: [
+                "Escape the convenience store without raising alarm.",
+                "Lose the 2-star police wanted level in Ocean Drive back alleys.",
+                "Drive back to the safehouse without wrecking your getaway vehicle."
+              ],
+              goldMedal: [
+                "Complete under 4 minutes 30 seconds.",
+                "Achieve 85% drive-by shooting accuracy.",
+                "Lose police without taking any vehicle damage."
+              ],
+              steps: [
+                "Sprint to the vehicle parked directly behind the store alley.",
+                "Make immediate sharp turns through alleyways to break police sightlines.",
+                "Hide under the overpass bridge until the flashing wanted stars vanish."
+              ]
+            },
+            {
+              id: "m_02",
+              title: "Mission 2: Keys Highway Intercept",
+              protagonist: "Jason",
+              difficulty: "Medium",
+              reward: "$10,000",
+              objectives: [
+                "Intercept the armored transport truck driving on Keys Freeway.",
+                "Attach the tow cable and pull the truck into the roadside ramp.",
+                "Secure the cargo loot and evade incoming security choppers."
+              ],
+              goldMedal: [
+                "Attach tow cable on the very first attempt.",
+                "Perform 4 headshots on pursuing guards.",
+                "Escape via speedboat in less than 3 minutes."
+              ],
+              steps: [
+                "Drive parallel to the armored transport on the right-hand lane.",
+                "Fire the magnetic winch prompt as soon as the target reticle turns neon green.",
+                "Steer toward the boat launch dock for a seamless water escape."
+              ]
+            }
+          ]
+        },
+        {
+          id: "chapter_2",
+          chapterTitle: "Act 2: Everglades & Port Operations",
+          missions: [
+            {
+              id: "m_03",
+              title: "Mission 3: Swampland Smugglers",
+              protagonist: "Lucia",
+              difficulty: "Hard",
+              reward: "$25,000",
+              objectives: [
+                "Navigate the fan boat through the thick swamp fog to reach cabin A.",
+                "Disable 3 security cameras silently using suppressor weapons.",
+                "Exfiltrate with the contraband package."
+              ],
+              goldMedal: [
+                "Remain completely undetected.",
+                "Collect all 3 hidden loot bags.",
+                "Reach the extraction point without taking health damage."
+              ],
+              steps: [
+                "Equip the silenced pistol before approaching the perimeter perimeter fence.",
+                "Time guard patrols and use water channels to stay out of thermal searchlights.",
+                "Rendezvous with Jason at the northern river pier."
+              ]
+            }
+          ]
+        }
+      ],
+
+      secrets: [
+        {
+          id: "sec_01",
+          title: "Fast ATM Money Glitch",
+          category: "Money & Business",
+          tags: ["Cash", "Glitch", "ATM"],
+          content: "Position an armored van directly in front of the Ocean Drive ATM. When pedestrians use the machine, knocking them down drops double cash stacks ($1,500+ per drop)."
+        },
+        {
+          id: "sec_02",
+          title: "How to Instantly Lose 5 Stars",
+          category: "Police Survival",
+          tags: ["Police", "Wanted", "Escape"],
+          content: "Drive directly into any Pay 'n' Spray or custom body shop while out of direct line-of-sight. Repainting your vehicle immediately clears up to 5 wanted stars."
+        },
+        {
+          id: "sec_03",
+          title: "Hidden Underwater Shipwreck Cargo",
+          category: "Collectibles",
+          tags: ["Secrets", "Loot", "Map"],
+          content: "Diving off the coast of Little Haiti with scuba gear reveals a sunken freighter at depth. Inside the main hold lies $50,000 cash and rare weapon spawns."
+        },
+        {
+          id: "sec_04",
+          title: "Free Helicopter at Starfish Island",
+          category: "Vehicles",
+          tags: ["Chopper", "Free", "Spawn"],
+          content: "Visit the rooftop helipad on the eastern mansion at Starfish Island. A fully fueled Maverick helicopter spawns every morning at 08:00 in-game time."
+        }
+      ]
+    };
+
+    // ==========================================
+    // APPLICATION STATE & LOCAL STORAGE
+    // ==========================================
+    let state = {
+      currentTab: 'dashboard',
+      platform: 'ps5', // 'ps5', 'xbox', 'pc'
+      selectedCheatCategory: 'All',
+      selectedSecretCategory: 'All',
+      bookmarks: [], // Array of item IDs
+      completedSteps: {}, // { stepKey: boolean }
+      searchQuery: ''
+    };
+
+    // Load from LocalStorage
+    function loadState() {
+      try {
+        const savedBookmarks = localStorage.getItem('vc_guide_bookmarks');
+        if (savedBookmarks) state.bookmarks = JSON.parse(savedBookmarks);
+
+        const savedSteps = localStorage.getItem('vc_guide_steps');
+        if (savedSteps) state.completedSteps = JSON.parse(savedSteps);
+
+        const savedPlatform = localStorage.getItem('vc_guide_platform');
+        if (savedPlatform) state.platform = savedPlatform;
+      } catch (e) {
+        console.error("LocalStorage read error", e);
+      }
+    }
+
+    function saveBookmarks() {
+      try {
+        localStorage.setItem('vc_guide_bookmarks', JSON.stringify(state.bookmarks));
+        updateBookmarkBadge();
+      } catch (e) {
+        console.error("LocalStorage write error", e);
+      }
+    }
+
+    function saveSteps() {
+      try {
+        localStorage.setItem('vc_guide_steps', JSON.stringify(state.completedSteps));
+        updateMissionProgressCount();
+      } catch (e) {
+        console.error("LocalStorage write error", e);
+      }
+    }
+
+    // ==========================================
+    // UI RENDERERS & HELPERS
+    // ==========================================
+
+    // Tab Switching
+    function switchTab(tabId) {
+      state.currentTab = tabId;
+      
+      // Update UI tabs
+      document.querySelectorAll('.tab-view').forEach(view => view.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-vice-pink', 'text-white', 'text-vice-pink');
+        btn.classList.add('text-gray-300', 'hover:bg-vice-card');
+      });
+
+      const targetView = document.getElementById(`view-${tabId}`);
+      if (targetView) targetView.classList.remove('hidden');
+
+      const activeNavBtn = document.getElementById(`nav-${tabId}`);
+      if (activeNavBtn) {
+        activeNavBtn.classList.add('bg-vice-pink', 'text-white');
+        activeNavBtn.classList.remove('text-gray-300', 'hover:bg-vice-card');
+      }
+
+      // If active tab is switched while searching, clear search highlight
+      if (tabId !== 'search-results' && state.searchQuery) {
+        clearSearch();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Platform Switcher
+    function setPlatform(plat) {
+      state.platform = plat;
+      localStorage.setItem('vc_guide_platform', plat);
+      
+      document.querySelectorAll('.platform-btn').forEach(btn => {
+        btn.classList.remove('bg-vice-pink', 'text-white', 'shadow');
+        btn.classList.add('text-gray-400', 'hover:text-white');
+      });
+
+      const activeBtn = document.getElementById(`platform-${plat}`);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-vice-pink', 'text-white', 'shadow');
+        activeBtn.classList.remove('text-gray-400');
+      }
+
+      renderCheats();
+      renderDashboardPopularCheats();
+      if (state.currentTab === 'bookmarks') renderBookmarks();
+    }
+
+    // Render Key Sequence Badges
+    function renderKeySequence(cheat) {
+      if (state.platform === 'pc') {
+        return `<span class="key-badge text-vice-pink font-mono text-sm px-3 py-1 bg-vice-pink/10 border-vice-pink/40">${cheat.pc}</span>`;
+      }
+
+      const keys = cheat[state.platform] || [];
+      return keys.map(k => `<span class="key-badge">${k}</span>`).join(' ');
+    }
+
+    // Toggle Bookmarks
+    function toggleBookmark(id) {
+      const index = state.bookmarks.indexOf(id);
+      if (index === -1) {
+        state.bookmarks.push(id);
+        showToast('Saved to bookmarks!');
+      } else {
+        state.bookmarks.splice(index, 1);
+        showToast('Removed from bookmarks');
+      }
+      saveBookmarks();
+      
+      // Refresh active views
+      if (state.currentTab === 'cheats') renderCheats();
+      if (state.currentTab === 'dashboard') renderDashboardPopularCheats();
+      if (state.currentTab === 'secrets') renderSecrets();
+      if (state.currentTab === 'bookmarks') renderBookmarks();
+      if (state.currentTab === 'search-results') handleGlobalSearch();
+    }
+
+    function isBookmarked(id) {
+      return state.bookmarks.includes(id);
+    }
+
+    function updateBookmarkBadge() {
+      const badge = document.getElementById('bookmark-count-badge');
+      if (!badge) return;
+      if (state.bookmarks.length > 0) {
+        badge.textContent = state.bookmarks.length;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    function clearAllBookmarks() {
+      state.bookmarks = [];
+      saveBookmarks();
+      renderBookmarks();
+      showToast('All bookmarks cleared');
+    }
+
+    // Copy Code Helper
+    function copyCheatCode(cheatId) {
+      const cheat = DATA.cheats.find(c => c.id === cheatId);
+      if (!cheat) return;
+
+      let codeText = "";
+      if (state.platform === 'pc') {
+        codeText = cheat.pc;
+      } else {
+        codeText = (cheat[state.platform] || []).join(', ');
+      }
+
+      // Copy using document.execCommand for safe iframe fallback
+      const tempInput = document.createElement('textarea');
+      tempInput.value = codeText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      showToast(`Copied ${cheat.title} (${state.platform.toUpperCase()}) code!`);
+    }
+
+    // RENDER CHEATS VIEW
+    function renderCheats() {
+      const grid = document.getElementById('cheats-grid');
+      const catContainer = document.getElementById('cheat-categories-container');
+      if (!grid) return;
+
+      // Render Categories
+      const categories = ['All', ...new Set(DATA.cheats.map(c => c.category))];
+      catContainer.innerHTML = categories.map(cat => `
+        <button onclick="filterCheatCategory('${cat}')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${state.selectedCheatCategory === cat ? 'bg-vice-cyan text-black' : 'bg-vice-bg text-gray-300 hover:text-white border border-vice-border'}">
+          ${cat}
+        </button>
+      `).join('');
+
+      // Filter Cheats
+      const filtered = DATA.cheats.filter(c => {
+        return state.selectedCheatCategory === 'All' || c.category === state.selectedCheatCategory;
+      });
+
+      grid.innerHTML = filtered.map(cheat => createCheatCardHTML(cheat)).join('');
+    }
+
+    function filterCheatCategory(cat) {
+      state.selectedCheatCategory = cat;
+      renderCheats();
+    }
+
+    function createCheatCardHTML(cheat) {
+      const bookmarked = isBookmarked(cheat.id);
+      return `
+        <div class="bg-vice-card border border-vice-border rounded-xl p-5 flex flex-col justify-between hover:border-vice-pink transition-all shadow-md group">
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-vice-pink/10 border border-vice-pink/30 text-vice-pink">
+                ${cheat.category}
+              </span>
+              <button onclick="toggleBookmark('${cheat.id}')" class="text-gray-400 hover:text-vice-pink transition-colors">
+                <i class="${bookmarked ? 'fa-solid text-vice-pink' : 'fa-regular'} fa-bookmark text-base"></i>
+              </button>
+            </div>
+            <h4 class="font-title text-white font-bold text-base mb-1 group-hover:text-vice-pink transition-colors">
+              ${cheat.title}
+            </h4>
+            <p class="text-xs text-gray-400 leading-relaxed mb-4">${cheat.description}</p>
+          </div>
+
+          <div>
+            <div class="bg-vice-bg/80 border border-vice-border/80 rounded-lg p-3 mb-3 text-center flex flex-wrap justify-center items-center gap-1 min-h-[50px]">
+              ${renderKeySequence(cheat)}
+            </div>
+            <button onclick="copyCheatCode('${cheat.id}')" class="w-full py-2 bg-vice-bg hover:bg-vice-border border border-vice-border rounded-lg text-xs font-semibold text-gray-300 hover:text-white transition-all flex items-center justify-center gap-2">
+              <i class="fa-regular fa-copy"></i> Copy ${state.platform.toUpperCase()} Code
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDashboardPopularCheats() {
+      const container = document.getElementById('dashboard-popular-cheats');
+      if (!container) return;
+      const popular = DATA.cheats.filter(c => c.popular).slice(0, 3);
+      container.innerHTML = popular.map(cheat => createCheatCardHTML(cheat)).join('');
+    }
+
+    // RENDER WALKTHROUGHS VIEW
+    function renderWalkthroughs() {
+      const accordion = document.getElementById('walkthroughs-accordion');
+      if (!accordion) return;
+
+      accordion.innerHTML = DATA.walkthroughs.map((chapter, chapIdx) => `
+        <div class="bg-vice-card border border-vice-border rounded-xl overflow-hidden shadow-md">
+          <button onclick="toggleChapterAccordion('chapter-body-${chapIdx}')" class="w-full px-5 py-4 bg-vice-card hover:bg-vice-border/50 text-left font-title font-bold text-white flex items-center justify-between transition-colors">
+            <span class="flex items-center gap-3 text-sm sm:text-base">
+              <i class="fa-solid fa-folder-open text-vice-yellow"></i> ${chapter.chapterTitle}
+            </span>
+            <i class="fa-solid fa-chevron-down text-xs text-gray-400"></i>
+          </button>
+          
+          <div id="chapter-body-${chapIdx}" class="p-5 border-t border-vice-border space-y-6">
+            ${chapter.missions.map(mission => renderMissionCardHTML(mission)).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      updateMissionProgressCount();
+    }
+
+    function toggleChapterAccordion(bodyId) {
+      const el = document.getElementById(bodyId);
+      if (el) el.classList.toggle('hidden');
+    }
+
+    function renderMissionCardHTML(mission) {
+      const bookmarked = isBookmarked(mission.id);
+      return `
+        <div class="bg-vice-bg border border-vice-border rounded-xl p-5 space-y-4">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-vice-border/60 pb-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-vice-yellow/10 text-vice-yellow border border-vice-yellow/30 uppercase">
+                  Difficulty: ${mission.difficulty}
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/30">
+                  Reward: ${mission.reward}
+                </span>
+              </div>
+              <h3 class="font-title text-base sm:text-lg font-bold text-white mt-1">
+                ${mission.title}
+              </h3>
+              <p class="text-xs text-gray-400">Protagonist: <span class="text-vice-cyan font-semibold">${mission.protagonist}</span></p>
+            </div>
+            
+            <button onclick="toggleBookmark('${mission.id}')" class="self-start sm:self-center text-xs bg-vice-card border border-vice-border px-3 py-1.5 rounded-lg text-gray-300 hover:text-vice-pink transition-all flex items-center gap-2">
+              <i class="${bookmarked ? 'fa-solid text-vice-pink' : 'fa-regular'} fa-bookmark"></i>
+              ${bookmarked ? 'Saved' : 'Save Mission'}
+            </button>
+          </div>
+
+          <!-- Mission Objectives -->
+          <div>
+            <h4 class="text-xs font-bold text-gray-300 uppercase tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-bullseye text-vice-pink"></i> Objectives
+            </h4>
+            <ul class="space-y-1.5 text-xs text-gray-300 pl-2">
+              ${mission.objectives.map(obj => `<li class="flex items-start gap-2"><i class="fa-solid fa-angle-right text-vice-cyan mt-0.5"></i> <span>${obj}</span></li>`).join('')}
+            </ul>
+          </div>
+
+          <!-- 100% Gold Medal Checklist -->
+          <div class="bg-vice-card/60 p-3 rounded-lg border border-vice-border">
+            <h4 class="text-xs font-bold text-vice-yellow uppercase tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-medal"></i> Gold Medal Requirements
+            </h4>
+            <ul class="space-y-1 text-xs text-gray-400 pl-1">
+              ${mission.goldMedal.map(req => `<li class="flex items-center gap-2"><i class="fa-solid fa-star text-vice-yellow text-[10px]"></i> ${req}</li>`).join('')}
+            </ul>
+          </div>
+
+          <!-- Interactive Step-by-Step Progress Checkboxes -->
+          <div>
+            <h4 class="text-xs font-bold text-gray-300 uppercase tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-list-check text-vice-cyan"></i> Step-by-Step Walkthrough
+            </h4>
+            <div class="space-y-2">
+              ${mission.steps.map((step, idx) => {
+                const stepKey = `${mission.id}_step_${idx}`;
+                const isChecked = !!state.completedSteps[stepKey];
+                return `
+                  <label class="flex items-start gap-3 p-2.5 rounded-lg bg-vice-card/40 border border-vice-border/50 hover:bg-vice-card cursor-pointer transition-colors text-xs text-gray-300">
+                    <input 
+                      type="checkbox" 
+                      onchange="toggleStepCheck('${stepKey}')" 
+                      ${isChecked ? 'checked' : ''} 
+                      class="mt-0.5 rounded border-gray-600 text-vice-pink focus:ring-vice-pink bg-vice-bg"
+                    >
+                    <span class="${isChecked ? 'line-through text-gray-500' : ''}">${step}</span>
+                  </label>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function toggleStepCheck(stepKey) {
+      state.completedSteps[stepKey] = !state.completedSteps[stepKey];
+      saveSteps();
+      renderWalkthroughs();
+    }
+
+    function updateMissionProgressCount() {
+      const counter = document.getElementById('completed-missions-count');
+      if (!counter) return;
+
+      let totalSteps = 0;
+      let completed = 0;
+
+      DATA.walkthroughs.forEach(ch => {
+        ch.missions.forEach(m => {
+          m.steps.forEach((_, idx) => {
+            totalSteps++;
+            if (state.completedSteps[`${m.id}_step_${idx}`]) completed++;
+          });
+        });
+      });
+
+      counter.textContent = `${completed} / ${totalSteps} Steps Cleared`;
+    }
+
+    // RENDER SECRETS VIEW
+    function renderSecrets() {
+      const grid = document.getElementById('secrets-grid');
+      const catContainer = document.getElementById('secrets-categories-container');
+      if (!grid) return;
+
+      const categories = ['All', ...new Set(DATA.secrets.map(s => s.category))];
+      catContainer.innerHTML = categories.map(cat => `
+        <button onclick="filterSecretCategory('${cat}')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${state.selectedSecretCategory === cat ? 'bg-vice-purple text-white' : 'bg-vice-bg text-gray-300 hover:text-white border border-vice-border'}">
+          ${cat}
+        </button>
+      `).join('');
+
+      const filtered = DATA.secrets.filter(s => {
+        return state.selectedSecretCategory === 'All' || s.category === state.selectedSecretCategory;
+      });
+
+      grid.innerHTML = filtered.map(sec => createSecretCardHTML(sec)).join('');
+    }
+
+    function filterSecretCategory(cat) {
+      state.selectedSecretCategory = cat;
+      renderSecrets();
+    }
+
+    function createSecretCardHTML(sec) {
+      const bookmarked = isBookmarked(sec.id);
+      return `
+        <div class="bg-vice-card border border-vice-border rounded-xl p-5 flex flex-col justify-between hover:border-vice-purple transition-all shadow-md group">
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-2">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-vice-purple/20 border border-vice-purple/40 text-vice-purple">
+                ${sec.category}
+              </span>
+              <button onclick="toggleBookmark('${sec.id}')" class="text-gray-400 hover:text-vice-purple transition-colors">
+                <i class="${bookmarked ? 'fa-solid text-vice-purple' : 'fa-regular'} fa-bookmark text-base"></i>
+              </button>
+            </div>
+            <h4 class="font-title text-white font-bold text-base mb-2 group-hover:text-vice-purple transition-colors">
+              ${sec.title}
+            </h4>
+            <p class="text-xs text-gray-300 leading-relaxed mb-4">${sec.content}</p>
+          </div>
+
+          <div class="flex flex-wrap gap-1 pt-2 border-t border-vice-border/60">
+            ${sec.tags.map(tag => `<span class="text-[10px] bg-vice-bg text-gray-400 px-2 py-0.5 rounded border border-vice-border">#${tag}</span>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // RENDER BOOKMARKS VIEW
+    function renderBookmarks() {
+      const grid = document.getElementById('bookmarks-grid');
+      if (!grid) return;
+
+      if (state.bookmarks.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center space-y-3 bg-vice-card/40 border border-dashed border-vice-border rounded-xl">
+            <i class="fa-solid fa-bookmark text-4xl text-gray-600"></i>
+            <p class="text-sm text-gray-400">No bookmarked items yet.</p>
+            <button onclick="switchTab('cheats')" class="px-4 py-2 bg-vice-pink text-white rounded-lg text-xs font-semibold">
+              Browse Cheat Codes
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      let cardsHTML = '';
+
+      state.bookmarks.forEach(id => {
+        // Search Cheats
+        const cheat = DATA.cheats.find(c => c.id === id);
+        if (cheat) {
+          cardsHTML += createCheatCardHTML(cheat);
+          return;
+        }
+
+        // Search Walkthrough Missions
+        DATA.walkthroughs.forEach(ch => {
+          ch.missions.forEach(m => {
+            if (m.id === id) {
+              cardsHTML += renderMissionCardHTML(m);
+            }
+          });
+        });
+
+        // Search Secrets
+        const secret = DATA.secrets.find(s => s.id === id);
+        if (secret) {
+          cardsHTML += createSecretCardHTML(secret);
+        }
+      });
+
+      grid.innerHTML = cardsHTML;
+    }
+
+    // GLOBAL SEARCH ENGINE
+    function handleGlobalSearch() {
+      const query = document.getElementById('global-search').value.trim().toLowerCase();
+      const clearBtn = document.getElementById('clear-search-btn');
+      state.searchQuery = query;
+
+      if (!query) {
+        clearBtn.classList.add('hidden');
+        switchTab(state.currentTab === 'search-results' ? 'dashboard' : state.currentTab);
+        return;
+      }
+
+      clearBtn.classList.remove('hidden');
+
+      // Hide active tabs & show Search Overlay
+      document.querySelectorAll('.tab-view').forEach(view => view.classList.add('hidden'));
+      const searchView = document.getElementById('view-search-results');
+      searchView.classList.remove('hidden');
+
+      const resultsGrid = document.getElementById('search-results-grid');
+      const resultsCount = document.getElementById('search-results-count');
+
+      let matches = [];
+
+      // Search Cheats
+      DATA.cheats.forEach(c => {
+        if (c.title.toLowerCase().includes(query) || c.description.toLowerCase().includes(query) || c.category.toLowerCase().includes(query)) {
+          matches.push({ type: 'cheat', data: c });
+        }
+      });
+
+      // Search Walkthroughs
+      DATA.walkthroughs.forEach(ch => {
+        ch.missions.forEach(m => {
+          if (m.title.toLowerCase().includes(query) || m.protagonist.toLowerCase().includes(query) || m.objectives.some(o => o.toLowerCase().includes(query))) {
+            matches.push({ type: 'mission', data: m });
+          }
+        });
+      });
+
+      // Search Secrets
+      DATA.secrets.forEach(s => {
+        if (s.title.toLowerCase().includes(query) || s.content.toLowerCase().includes(query) || s.tags.some(t => t.toLowerCase().includes(query))) {
+          matches.push({ type: 'secret', data: s });
+        }
+      });
+
+      resultsCount.textContent = `${matches.length} result${matches.length === 1 ? '' : 's'} found`;
+
+      if (matches.length === 0) {
+        resultsGrid.innerHTML = `
+          <div class="col-span-full py-12 text-center space-y-2 bg-vice-card/40 border border-vice-border rounded-xl">
+            <i class="fa-solid fa-ghost text-3xl text-gray-500"></i>
+            <p class="text-sm text-gray-400">No cheats, missions, or secrets found matching "<span class="text-vice-cyan">${query}</span>"</p>
+          </div>
+        `;
+        return;
+      }
+
+      resultsGrid.innerHTML = matches.map(item => {
+        if (item.type === 'cheat') return createCheatCardHTML(item.data);
+        if (item.type === 'mission') return renderMissionCardHTML(item.data);
+        if (item.type === 'secret') return createSecretCardHTML(item.data);
+      }).join('');
+    }
+
+    function clearSearch() {
+      document.getElementById('global-search').value = '';
+      state.searchQuery = '';
+      document.getElementById('clear-search-btn').classList.add('hidden');
+      switchTab('dashboard');
+    }
+
+    // TOAST NOTIFICATIONS
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-msg');
+      if (!toast || !msg) return;
+
+      msg.textContent = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      }, 2500);
+    }
+
+    // MOBILE MENU TOGGLE
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    // INITIALIZATION ON LOAD
+    window.onload = function() {
+      loadState();
+      setPlatform(state.platform);
+      renderDashboardPopularCheats();
+      renderCheats();
+      renderWalkthroughs();
+      renderSecrets();
+      renderBookmarks();
+      updateBookmarkBadge();
+      switchTab('dashboard');
+    };
+  </script>
+</body>
+</html>
