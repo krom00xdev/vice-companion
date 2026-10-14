@@ -1,12 +1,17 @@
 {
-  "background_color": "#0f0f1b",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "Companion Guide for Vice City",
-  "orientation": "any",
-  "scope": "/",
   "short_name": "Vice City Guide",
-  "start_url": "unrivaled-kheer-72b6be.netlify.app",
+  "description": "Fast offline companion guide for Vice City cheat codes, walkthroughs, and secrets.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f0f1b",
   "theme_color": "#0f0f1b",
-  "lang": "en"
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%230f0f1b'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='200' fill='%2300f3ff'>VC</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }
